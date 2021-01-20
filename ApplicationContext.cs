@@ -11,7 +11,7 @@ namespace CasaDoCodigo
         }
 
 
-        //substituição do método par criar o o
+        //substituição do método para criar um modelo para fazer o mapeamento.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
