@@ -24,13 +24,18 @@ namespace CasaDoCodigo
         {
             services.AddMvc();
 
+
+            string connectionString = Configuration.GetConnectionString("Default");
+
             services.AddDbContext<ApplicationContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("AplicationContext"), builder =>
-                    builder.MigrationsAssembly("CasaDoCodigo")));
+                options.UseSqlServer(connectionString));
+
+            services.AddTransient<IDataService, DataService>();//Registro da classse para injeçãao de depeendencias
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -47,8 +52,10 @@ namespace CasaDoCodigo
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Pedido}/{action=Carrossel}/{id?}");
+                    template: "{controller=Pedido}/{action=Carrossel}/{id?}");//Rotaa troca para que a home seja o carrossel da página.
             });
+
+            serviceProvider.GetService<IDataService>().InicializaDb();//Métoddo para chamar a injeçãao de depencias
         }
     }
 }
