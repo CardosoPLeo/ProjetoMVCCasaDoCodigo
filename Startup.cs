@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CasaDoCodigo.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,7 @@ namespace CasaDoCodigo
                 options.UseSqlServer(connectionString));
 
             services.AddTransient<IDataService, DataService>();//Registro da classse para injeçãao de depeendencias
+            services.AddTransient<IProdutoRepository, ProdutoRepository>();//Registro da interface do repository de produto
 
         }
 
