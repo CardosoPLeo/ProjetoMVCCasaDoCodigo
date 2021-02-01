@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\HomeController.cs" />
+    <Compile Remove="Repositories\PedidoRepositiry.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\" />

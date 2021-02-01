@@ -31,9 +31,11 @@ namespace CasaDoCodigo
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            services.AddTransient<IDataService, DataService>();//Registro da classse para injeçãao de depeendencias
+            services.AddTransient<IDataService, DataService>();//Registro da classse para injeção de depeendencias de dados
             services.AddTransient<IProdutoRepository, ProdutoRepository>();//Registro da interface do repository de produto
-
+            services.AddTransient<ICadastroRepository,CadastroRepositry>();
+            services.AddTransient<IPedidoRepository, PedidoRepository>();
+            services.AddTransient<IItemPedidoRepository, ItemPedidoRepositiry>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,10 +56,10 @@ namespace CasaDoCodigo
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Pedido}/{action=Carrossel}/{id?}");//Rotaa troca para que a home seja o carrossel da página.
+                    template: "{controller=Pedido}/{action=Carrossel}/{codigo?}");//Rota troca para que a home seja o carrossel da página.
             });
 
-            serviceProvider.GetService<IDataService>().InicializaDb();//Métoddo para chamar a injeçãao de depencias
+            serviceProvider.GetService<IDataService>().InicializaDb();//Método para chamar a injeçãao de depencias
         }
     }
 }
